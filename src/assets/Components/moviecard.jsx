@@ -1,20 +1,26 @@
-function MovieCard({ img, title }) {
+
+function MovieCard({ imageUrl, description, releaseYear }) {
   return (
-    <article>
+    <div className="bg-gray-900 text-white rounded-lg overflow-hidden shadow-lg">
+
       <img
-        className="w-full aspect-[2/3] object-cover rounded-md mb-[10px] block"
-        src={`/${img}`}
-        alt={title}
+        src={imageUrl || '/placeholder.png'}
+        alt="Movie poster"
+        className="w-full h-72 object-cover"
+        onError={(e) => {
+          e.currentTarget.src = '/placeholder.png'
+        }}
       />
 
-      <h3 className="text-xs font-medium truncate">
-        {title}
-      </h3>
+      <div className="p-3">
+        <p className="text-sm">{releaseYear}</p>
 
-      <p className="text-[11px] text-[#9a9a9a] mt-1">
-        2023 <span className="text-[#e0147a] mx-1">•</span> 104 min
-      </p>
-    </article>
+        <p className="black text-sm mt-2">
+          {description}
+        </p>
+      </div>
+
+    </div>
   )
 }
 

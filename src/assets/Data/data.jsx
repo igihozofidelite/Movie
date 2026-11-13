@@ -74,7 +74,7 @@ export const mayLike = [
     img: 'f19.png',
     title: 'The Pregnancy...',
   },
-
+  
   {
     img: 'f20.png',
     title: 'The DAYS',
@@ -86,6 +86,10 @@ export const mayLike = [
   {
     img: 'f22.png',
     title: 'Turn of the Tide',
+  },
+  {
+    img: 'f12.png',
+    title: 'The Prank Panel',
   },
   {
     img: 'f23.png',

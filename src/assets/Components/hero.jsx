@@ -1,34 +1,132 @@
-function Hero() {
-    return (
-        <section className="grid grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] items-center gap-[30px] px-[6%] pt-[35px] pb-[65px] min-h-[480px] max-[1000px]:grid-cols-1 max-[1000px]:gap-[35px] max-[600px]:pb-[55px]">
-      <div className="relative z-2">
-        <h1 className="font-['Barlow_Condensed',sans-serif] text-[38px] leading-none font-extrabold max-[600px]:text-[34px]">
+
+function Hero({ movies = [] }) {
+
+  // Make sure we receive an array
+  const movieList = Array.isArray(movies)
+    ? movies
+    : movies?.results || []
+
+  const posters = movieList
+    .filter((movie) => movie.poster_path)
+    .slice(0, 5)
+
+  const imageBase = "https://image.tmdb.org/t/p/w500"
+
+  return (
+    <section className="hero-section relative overflow-hidden grid grid-cols-2 items-center gap-8 px-[6%] py-16 min-h-[540px] max-[900px]:grid-cols-1">
+
+      {/* Background effects */}
+      <div className="hero-light light-one"></div>
+      <div className="hero-light light-two"></div>
+
+      {/* LEFT SIDE */}
+      <div className="relative z-10">
+
+        <p className="text-purple-300 font-bold tracking-[4px] text-sm mb-6">
+          YOUR MOVIE DESTINATION
+        </p>
+
+        <h1 className="text-white text-5xl font-extrabold leading-tight max-[600px]:text-4xl">
           FIND MOVIES
-          <span className="block text-[clamp(32px,3.3vw,46px)] font-extrabold whitespace-nowrap bg-linear-to-r from-[#2b13ff] via-[#7620c8] to-[#d10c65] bg-clip-text text-transparent max-[1000px]:whitespace-normal max-[600px]:text-[36px]">
+
+          <span className="block animated-heading">
             TV SHOWS AND MORE
           </span>
         </h1>
-        <p className="text-[#bdbdbd] text-sm leading-[1.25] max-w-[440px] mt-[22px] mb-[30px]">
-          Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when a unknown printer took a galley of type and scrambled it to make a type specimen book.
+
+        <p className="text-gray-200 text-sm leading-7 max-w-[440px] mt-6 mb-8">
+          Discover the latest movies, explore amazing TV shows
+          and find your next favorite story. Everything you love
+          about entertainment in one place.
         </p>
-        <a className="inline-flex items-center justify-center gap-2 px-5 py-3 border border-[#ddd] rounded-md text-[13px] font-semibold transition-colors duration-200 hover:bg-purple-900" href="#">
-          <span>▶</span>
-          Watch Tutorial
+
+        <a
+          href="#movies"
+          className="hero-explore inline-block px-8 py-3 rounded-full text-white font-bold"
+        >
+          Explore Movies →
         </a>
+
+        <div className="flex gap-8 mt-10 text-gray-300 text-sm">
+
+          <div>
+            <h3 className="text-white text-xl font-bold">10K+</h3>
+            Movies
+          </div>
+
+          <div>
+            <h3 className="text-white text-xl font-bold">500+</h3>
+            TV Shows
+          </div>
+
+          <div>
+            <h3 className="text-white text-xl font-bold">24/7</h3>
+            Entertainment
+          </div>
+
+        </div>
+
       </div>
 
-      <div className="relative min-w-0 h-[440px] max-[1000px]:h-[420px] max-[1000px]:w-full max-[1000px]:max-w-[500px] max-[1000px]:mx-auto max-[600px]:h-[310px]">
-        <img className="absolute right-0 top-0 z-1 w-[300px] h-[400px] object-cover max-[1000px]:w-[min(60%,260px)] max-[1000px]:h-[350px] max-[600px]:w-[55%] max-[600px]:h-[270px]" src="guard.avif" alt="Back poster" />
-        <img className="absolute right-[160px] top-[40px] z-2 w-[300px] h-[400px] object-cover max-[1000px]:right-[30%] max-[1000px]:top-[35px] max-[1000px]:w-[min(60%,260px)] max-[1000px]:h-[350px] max-[600px]:right-[35%] max-[600px]:top-[30px] max-[600px]:w-[55%] max-[600px]:h-[270px]" src="spider.jpg" alt="Front poster" />
-       <button
-        className="absolute right-[280px] top-[240px] translate-x-1/2 -translate-y-1/2 z-3 w-[60px] h-[60px] rounded-full bg-white flex items-center justify-center text-[22px] cursor-pointer shadow-lg transition-all duration-300 hover:scale-110 hover:bg-purple-100 max-[1000px]:right-1/2 max-[1000px]:top-[200px] max-[600px]:top-[150px] max-[600px]:w-[50px] max-[600px]:h-[50px]"
-          aria-label="Play trailer">
-  <span className="text-red-600 drop-shadow-[1px_1px_1px_black]">
-    ▶
-  </span>
-</button>
+      {/* RIGHT SIDE - TMDB MOVIES */}
+      <div className="relative z-10 flex justify-center items-center min-h-[430px]">
+
+        {posters.length > 0 ? (
+
+          <div className="hero-poster-area">
+
+            {posters.map((movie, index) => (
+
+              <div
+                key={movie.id}
+                className={`hero-poster hero-poster-${index}`}
+              >
+
+                <img
+                  src={`${imageBase}${movie.poster_path}`}
+                  alt={movie.title || movie.name || "Movie poster"}
+                  onError={(e) => {
+                    e.currentTarget.style.display = "none"
+                  }}
+                />
+
+                <div className="hero-poster-info">
+                  <p>
+                    {movie.title || movie.name}
+                  </p>
+
+                  <span>
+                    ★ {movie.vote_average
+                      ? movie.vote_average.toFixed(1)
+                      : "New"}
+                  </span>
+                </div>
+
+              </div>
+
+            ))}
+
+          </div>
+
+        ) : (
+
+          <div className="text-center text-white">
+            <p className="text-xl font-bold">
+              
+            </p>
+
+            <p className="text-gray-400 text-sm mt-2">
+              
+            </p>
+          </div>
+
+        )}
+
       </div>
+
     </section>
-    )
+  )
 }
+
 export default Hero
+

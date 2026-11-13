@@ -1,33 +1,38 @@
+
 import MovieCard from './moviecard'
 
 function MovieSection({ heading, movies }) {
+  console.log("Movies received:", movies)
+
   return (
-    <section className="px-[6%] pb-[60px]">
+    <section className="mx-auto p-4 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
 
-      <div className="flex items-center gap-4 mb-5">
-        <h2 className="text-lg font-bold">{heading}</h2>
+      {movies?.map((item, index) => {
 
-        <span className="flex-1 h-px bg-[#222]"></span>
+        console.log("Movie poster:", item.poster_path)
 
-        <a
-          href="#"
-          className="text-xs text-[#9a9a9a] hover:text-white"
-        >
-          See More
-        </a>
-      </div>
-
-      <div className="grid grid-cols-6 gap-x-[14px] gap-y-5 max-[1000px]:grid-cols-3 max-[600px]:grid-cols-2">
-
-        {movies.map((movie) => (
+        return (
           <MovieCard
-            key={movie.img}
-            img={movie.img}
-            title={movie.title}
+            key={item.id || index}
+            imageUrl={
+              item.poster_path
+                ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
+                : null
+            }
+            description={
+              item.overview
+                ? item.overview.substring(0, 50) + '...'
+                : 'No description available'
+            }
+            releaseYear={
+              item.release_date
+                ? item.release_date.substring(0, 4)
+                : 'Unknown year'
+            }
           />
-        ))}
+        )
+      })}
 
-      </div>
     </section>
   )
 }

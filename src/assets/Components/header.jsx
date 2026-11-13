@@ -9,19 +9,19 @@ function Header() {
     <a className="text-purple-400 font-bold hover:text-purple-300 transition-colors" href="#">
       Home
     </a>
-    <a className="text-white font-bold hover:text-purple-400 transition-colors" href="#">
+    <a className="text-red-200 font-bold hover:text-purple-400 transition-colors" href="#">
       Explore
     </a>
-    <a className="text-white font-bold hover:text-purple-400 transition-colors" href="#">
+    <a className="text-red-200 font-bold hover:text-purple-400 transition-colors" href="#">
       Genres
     </a>
-    <a className="text-white font-bold hover:text-purple-400 transition-colors" href="#">
+    <a className="text-red-200 font-bold hover:text-purple-400 transition-colors" href="#">
       New
     </a>
-    <a className="text-white font-bold hover:text-purple-400 transition-colors" href="#">
+    <a className="text-red-200 font-bold hover:text-purple-400 transition-colors" href="#">
       Movies
     </a>
-    <a className="text-white font-bold hover:text-purple-400 transition-colors" href="#">
+    <a className="text-red-200 font-bold hover:text-purple-400 transition-colors" href="#">
       TV Shows
     </a>
   </nav>
